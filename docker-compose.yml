@@ -1,0 +1,15 @@
+version: '2'
+services:
+#  node:
+#    image: node:4.2.3
+#    working_dir: /usr/src/app
+#    ports:
+#     - "9005:9005"
+#    volumes:
+#     - ./html:/usr/src/app
+  nginx:
+    image: nginx
+    ports:
+     - "8080:80"
+    volumes:
+     - ./html:/usr/share/nginx/html:ro
