@@ -1,8 +1,15 @@
 version: '2'
 services:
-  nginx:
-    image: nginx
+  node:
+    build: ./node
     ports:
-     - "8080:80"
+     - "3000:3000"
     volumes:
-     - ./html:/usr/share/nginx/html:ro
+     - ./html:/usr/src/app
+    working_dir: /usr/src/app
+#  nginx:
+#    image: nginx
+#    ports:
+#     - "8080:80"
+#    volumes:
+#     - ./html:/usr/share/nginx/html:ro

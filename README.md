@@ -1,20 +1,18 @@
 # react_sample
 
 # Run sample
-1. Up nginx
+1. Up node
 ```bash
 $ docker-compose up -d
 ```
 
-2. View any browser
-```bash
-http://localhost:8080/index.html
+2. cd
+``` bash
+$ cd todo-app
+$ npm start
 ```
 
-# Edit source
-
-edit by any editor.
+3. View any browser
 ```bash
-e.g.
-react_sample/html/index.html
+http://localhost:3000
 ```
