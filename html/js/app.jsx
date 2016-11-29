@@ -1,3 +1,27 @@
+class Example extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+
+    this.state ={
+      startDate: moment()
+    }
+  }
+
+  handleChange(date) {
+    this.setState({
+      startDate: date
+    });
+  }
+
+  render() {
+    return <DatePicker
+        selected={this.state.startDate}
+        onChange={this.handleChange} />;
+  }
+}
+
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
@@ -16,11 +40,12 @@ class TodoApp extends React.Component {
     return (
       <div>
         <h3>TODO</h3>
-        <TodoList items={this.state.items} onUpdateDone={this.updateDone} onDelete={this.delete}/>
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} value={this.state.newTodoLabel} />
-          <button>{'Add #' + (this.state.items.length + 1)}</button>
+          <input onChange={this.handleChange} value={this.state.newTodoLabel} placeholder="what's to do?"/>
+          <button>{'ADD'}</button>
+          <Example />
         </form>
+        <TodoList items={this.state.items} onUpdateDone={this.updateDone} onDelete={this.delete}/>
       </div>
     );
   }
@@ -48,14 +73,11 @@ class TodoApp extends React.Component {
         return item.id == targetId;
     })[0];
 
-    // targetItem.done = newDone;
+    targetItem.done = newDone;
 
-    this.setState({
-      items: React.addons.update(this.state.items, { targetId : { $set: newDone }})
-    })
-    // this.setState(
-    //   {items:this.state.items.concat(targetItem)}
-    // )
+    this.setState(
+      {items:this.state.items}
+    )
   }
 
   delete(id){
