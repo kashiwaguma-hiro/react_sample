@@ -26,3 +26,21 @@
 .completed {
     text-decoration: line-through;
 }
+
+#root {
+  margin: 10px
+}
+
+.datepicker {
+  display: inline-block;
+  margin: 0px 5px;
+}
+
+.datepicker input {
+  width: 65px;
+}
+
+.delete-button {
+
+  width: 40px;
+}
