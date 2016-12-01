@@ -9,6 +9,7 @@ class TodoApp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateDone = this.updateDone.bind(this);
     this.delete = this.delete.bind(this);
+    this.updateDate = this.updateDate.bind(this);
     this.state = {
       items: [],
       newTodoLabel: ''
@@ -23,7 +24,7 @@ class TodoApp extends React.Component {
           <input onChange={this.handleChange} value={this.state.newTodoLabel} placeholder="what's to do?"/>
           <button>{'ADD'}</button>
         </form>
-        <TodoList items={this.state.items} onUpdateDone={this.updateDone} onDelete={this.delete}/>
+        <TodoList items={this.state.items} onUpdateDone={this.updateDone} onDelete={this.delete} onUpdateDate={this.updateDate}/>
       </div>
     );
   }
@@ -37,7 +38,8 @@ class TodoApp extends React.Component {
     var newItem = {
       id: Date.now(),
       label: this.state.newTodoLabel,
-      done: false
+      done: false,
+      date: ''
     };
 
     this.setState((prevState) => ({
@@ -58,6 +60,18 @@ class TodoApp extends React.Component {
     )
   }
 
+  updateDate(targetId, moment){
+    var targetItem = this.state.items.filter((item) => {
+        return item.id === targetId;
+    })[0];
+
+    targetItem.date = moment;
+
+    this.setState(
+      {items:this.state.items}
+    )
+  }
+
   delete(id){
     this.setState({
       items: this.state.items.filter((item) => {
@@ -72,7 +86,7 @@ class TodoList extends React.Component {
       return (
         <ul>
           {this.props.items.map(item => (
-            <TodoItem key={item.id} item={item} onUpdateDone={this.props.onUpdateDone} onDelete={this.props.onDelete}/>
+            <TodoItem key={item.id} item={item} onUpdateDone={this.props.onUpdateDone} onDelete={this.props.onDelete} onUpdateDate={this.props.onUpdateDate}/>
           ))}
         </ul>
       );
@@ -83,11 +97,16 @@ class TodoItem extends React.Component {
   constructor(props) {
     super(props);
     this._onUpdateDone = this._onUpdateDone.bind(this);
+    this._onUpdateDate = this._onUpdateDate.bind(this);
     this._onDelete = this._onDelete.bind(this);
   }
 
   _onUpdateDone(e){
     this.props.onUpdateDone(this.props.item.id, e.target.checked);
+  }
+
+  _onUpdateDate(moment){
+    this.props.onUpdateDate(this.props.item.id, moment);
   }
 
   _onDelete(){
@@ -105,7 +124,7 @@ class TodoItem extends React.Component {
           <input type="checkbox" checked={done ? 'checked': ''} onChange={this._onUpdateDone}/>
           {label}
         </label>
-        <Datetime className="datepicker" dateFormat="YYYY/MM/DD" timeFormat=""/>
+        <Datetime className="datepicker" dateFormat="YYYY/MM/DD" timeFormat=""　onBlur={this._onUpdateDate}/>
         <input type="button" onClick={this._onDelete} value="DEL" className="delete-button"/>
         </div>
       </li>
