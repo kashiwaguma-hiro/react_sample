@@ -1,19 +1,22 @@
 # react_sample
 
-# Run sample
-1. Up node
+React.js study.
+
+# Run and build Todo-App
+1. up docker conainer
 ```bash
 $ docker-compose up -d
 ```
-2. cd
+2. enter container, and change directory
 ``` bash
 $ docker exec -it reactsample_node_1 bash
-$ cd todo-app
+```
+3. build app and show on browser
+```bash
 $ npm start
 ```
-3. View any browser
 ```bash
-http://localhost:3000
+url:http://localhost:3000
 ```
 4. deploy to gh-pages
 ```bash
@@ -26,3 +29,19 @@ $ npm run deploy
 ```bash
 https://kashiwaguma-hiro.github.io/react_sample/
 ```
+
+
+# Refs
+
+### React
+https://facebook.github.io/react/
+
+### create-react-app
+https://github.com/facebookincubator/create-react-app 
+http://qiita.com/chibicode/items/8533dd72f1ebaeb4b614
+
+### React datetime.
+https://www.npmjs.com/package/react-datetime#contributions
+
+### Deploy to gh-pages. 
+https://blog.wadackel.me/2016/create-react-app/
